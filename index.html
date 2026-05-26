@@ -7,31 +7,33 @@
   <title>Roman Yosi Official</title>
 
   <!-- SEO META -->
-  <meta name="description" content="Roman Yosi Official - Musisi dan creator Indonesia. Dengarkan karya musik terbaru di YouTube, Spotify, dan platform digital lainnya.">
-  <meta name="keywords" content="Roman Yosi, musik Indonesia, DJ Indonesia, artist Roman Yosi, official music">
+  <meta name="description" content="Roman Yosi Official - Musisi dan creator Indonesia. Dengarkan karya musik terbaru di Spotify, YouTube, dan TikTok.">
+  <meta name="keywords" content="Roman Yosi, musik Indonesia, artist, DJ, Roman Yosi Official">
   <meta name="author" content="Roman Yosi">
+  <meta name="robots" content="index, follow">
 
   <!-- CANONICAL -->
   <link rel="canonical" href="https://roman-yosi.github.io/roman-yosi-music/">
 
   <!-- OPEN GRAPH -->
   <meta property="og:title" content="Roman Yosi Official">
-  <meta property="og:description" content="Musisi dan creator Indonesia - Roman Yosi Official Music">
+  <meta property="og:description" content="Musisi dan creator Indonesia - Roman Yosi Official">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://roman-yosi.github.io/roman-yosi-music/">
-
-  <!-- FOTO UTAMA (INI SUDAH KAMU KASIH) -->
   <meta property="og:image" content="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
 
-  <!-- GOOGLE KNOWLEDGE PANEL / STRUCTURED DATA -->
+  <!-- GOOGLE ENTITY STRUCTURED DATA -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "MusicGroup",
+    "@type": ["MusicGroup", "Person"],
     "name": "Roman Yosi",
+    "alternateName": "Roman Yosi Official",
     "url": "https://roman-yosi.github.io/roman-yosi-music/",
-    "description": "Roman Yosi adalah musisi dan creator asal Indonesia yang aktif merilis musik di YouTube, Spotify, dan platform digital.",
-    "image": "https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg"
+    },
     "sameAs": [
       "https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ",
       "https://youtube.com/@romanyosi",
@@ -60,9 +62,15 @@
       margin-bottom:10px;
     }
 
-    p{
-      color:#ccc;
-      font-size:18px;
+    .badge{
+      display:inline-block;
+      background:#1da1f2;
+      color:white;
+      padding:4px 10px;
+      border-radius:20px;
+      font-size:13px;
+      margin-left:8px;
+      vertical-align:middle;
     }
 
     .container{
@@ -76,22 +84,18 @@
       padding:25px;
       margin:20px 0;
       border-radius:15px;
-      box-shadow:0 0 10px rgba(0,0,0,0.4);
+      text-align:left;
     }
 
-    .btn{
-      display:inline-block;
-      padding:12px 25px;
-      margin-top:15px;
-      background:#00c853;
-      color:white;
-      text-decoration:none;
-      border-radius:10px;
-      font-weight:bold;
-    }
+    a{ color:#00e676; text-decoration:none; }
 
-    .btn:hover{
-      background:#00e676;
+    img.profile{
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      object-fit:cover;
+      border:3px solid #00e676;
+      margin-top:20px;
     }
 
     footer{
@@ -100,67 +104,93 @@
       font-size:14px;
     }
 
-    a{
-      color:#00e676;
-      text-decoration:none;
-    }
-
-    img.profile{
-      width:180px;
-      height:180px;
-      border-radius:50%;
-      object-fit:cover;
-      margin-top:20px;
-      border:3px solid #00e676;
+    h2{
+      color:#1db954;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Roman Yosi Official</h1>
-    <p>Musisi • Creator • Official Artist</p>
+<header>
+  <h1>
+    Roman Yosi Official
+    <span class="badge">✓ Official Artist</span>
+  </h1>
+  <p>Musisi • Creator • Independent Artist</p>
 
-    <!-- FOTO PROFIL -->
-    <img class="profile" src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg" alt="Roman Yosi Official">
-  </header>
+  <img class="profile" src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg" alt="Roman Yosi Official Music Artist">
+</header>
 
-  <div class="container">
+<div class="container">
 
-    <div class="card">
-      <h2>🎵 Tentang</h2>
-      <p>
-        Roman Yosi adalah musisi dan creator asal Indonesia yang aktif merilis musik di YouTube, Spotify, dan platform digital.
-      </p>
-    </div>
+  <!-- ABOUT -->
+  <div class="card">
+    <h2>🎵 Tentang</h2>
+    <p>
+      Roman Yosi adalah music artist dan creator asal Indonesia yang aktif merilis musik di Spotify, YouTube, dan TikTok.
+    </p>
+  </div>
 
-    <div class="card">
-      <h2>🔥 Rilisan Terbaru</h2>
-      <p>Itu Haruslah</p>
-      <p>Bertepi Di Sini</p>
-      <p>Jejak Di Dada</p>
+  <!-- RILIS -->
+  <div class="card">
+    <h2>🔥 Rilisan Terbaru</h2>
+    <p>Itu Haruslah</p>
+    <p>Bertepi Di Sini</p>
+    <p>Jejak Di Dada</p>
+  </div>
 
-      <a class="btn" href="https://youtube.com/@romanyosi">
-        Kunjungi YouTube
-      </a>
-    </div>
+  <!-- ARTIKEL SEO + ENTITY BOOST -->
+  <div class="card">
 
-    <div class="card">
-      <h2>📱 Sosial Media</h2>
+    <h2>🎤 ARTIST PROFILE: ROMAN YOSI</h2>
 
-      <p>TikTok: <a href="https://www.tiktok.com/@romanyosi">@romanyosi</a></p>
-      <p>Instagram: <a href="https://www.instagram.com/roman.yosi">@roman.yosi</a></p>
-      <p>Spotify: <a href="https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ">Roman Yosi Artist</a></p>
-      <p>YouTube: <a href="https://youtube.com/@romanyosi">@romanyosi</a></p>
+    <p>
+      Roman Yosi adalah music artist dan creator asal Indonesia yang membangun kariernya melalui platform musik seperti Spotify, YouTube, dan TikTok.
+      Ia dikenal sebagai artis independen yang fokus pada storytelling dan ekspresi emosional dalam musik.
+    </p>
 
-    </div>
+    <p>
+      Sebagai kreator musik, Roman Yosi mengembangkan gaya yang menggabungkan elemen modern pop dan pendekatan emosional dalam setiap karya.
+    </p>
+
+    <h2>CAREER BACKGROUND</h2>
+
+    <p>
+      Roman Yosi memulai perjalanan musik sebagai kreator independen dan berkembang melalui platform streaming global.
+    </p>
+
+    <h2>MUSIC STYLE</h2>
+
+    <ul>
+      <li>Modern Pop</li>
+      <li>Emotional Storytelling</li>
+      <li>Independent Music Style</li>
+    </ul>
+
+    <h2>DIGITAL PRESENCE</h2>
+
+    <p>
+      Roman Yosi aktif di Spotify, YouTube, dan TikTok sebagai platform utama distribusi karya musiknya.
+    </p>
 
   </div>
 
-  <footer>
-    © 2026 Roman Yosi Official
-  </footer>
+  <!-- SOCIAL -->
+  <div class="card">
+    <h2>📱 Sosial Media</h2>
+
+    <p>TikTok: <a href="https://www.tiktok.com/@romanyosi">@romanyosi</a></p>
+    <p>Instagram: <a href="https://www.instagram.com/roman.yosi">@roman.yosi</a></p>
+    <p>Spotify: <a href="https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ">Artist Profile</a></p>
+    <p>YouTube: <a href="https://youtube.com/@romanyosi">@romanyosi</a></p>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Roman Yosi Official
+</footer>
 
 </body>
 </html>

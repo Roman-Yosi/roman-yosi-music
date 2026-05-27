@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://roman-yosi.github.io/roman-yosi-music/sitemap.xml

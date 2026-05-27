@@ -3,8 +3,22 @@
 
   <url>
     <loc>https://roman-yosi.github.io/roman-yosi-music/</loc>
-    <lastmod>2026-05-26</lastmod>
-    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://roman-yosi.github.io/roman-yosi-music/about.html</loc>
+  </url>
+
+  <url>
+    <loc>https://roman-yosi.github.io/roman-yosi-music/music.html</loc>
+  </url>
+
+  <url>
+    <loc>https://roman-yosi.github.io/roman-yosi-music/press/index.html</loc>
+  </url>
+
+  <url>
+    <loc>https://roman-yosi.github.io/roman-yosi-music/press/article-1.html</loc>
   </url>
 
 </urlset>

@@ -4,44 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
   <title>Roman Yosi Official</title>
+
+  <meta name="description" content="Roman Yosi Official - Musisi dan creator Indonesia. Dengarkan karya musik terbaru di Spotify, YouTube, dan TikTok.">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://roman-yosi.github.io/roman-yosi-music/">
+
+  <meta property="og:title" content="Roman Yosi Official">
+  <meta property="og:description" content="Musisi dan creator Indonesia - Roman Yosi Official">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://roman-yosi.github.io/roman-yosi-music/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
+
+  <!-- 🔥 FINAL KNOWLEDGE GRAPH SCHEMA -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Roman Yosi",
+    "alternateName": "Roman Yosi Official",
+    "url": "https://roman-yosi.github.io/roman-yosi-music/",
+    "image": "https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg",
+    "description": "Indonesian independent music artist specializing in emotional pop and storytelling music.",
+    "genre": "Indie Pop",
+    "sameAs": [
+      "https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ",
+      "https://www.youtube.com/@romanyosi",
+      "https://www.youtube.com/@romanyosimusic",
+      "https://www.tiktok.com/@romanyosi",
+      "https://www.instagram.com/roman.yosi",
+      "https://www.wikidata.org/wiki/Q139959645",
+      "https://musicbrainz.org/artist/7193887"
+    ]
+  }
+  </script>
 
   <style>
     body{
       margin:0;
-      font-family:Arial;
+      font-family:Arial, sans-serif;
       background:#0f0f0f;
       color:white;
       text-align:center;
     }
 
     header{
-      padding:40px;
-      background:#111;
+      padding:60px 20px;
+      background:linear-gradient(135deg,#111,#222);
+    }
+
+    h1{font-size:42px;margin-bottom:10px;}
+
+    .badge{
+      display:inline-block;
+      background:#1db954;
+      color:white;
+      padding:4px 10px;
+      border-radius:20px;
+      font-size:13px;
+      margin-left:8px;
+    }
+
+    nav a{
+      color:#00e676;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
     }
 
     .container{
+      padding:30px 20px;
       max-width:900px;
       margin:auto;
-      padding:20px;
     }
 
     .card{
       background:#1b1b1b;
-      padding:20px;
-      margin:15px 0;
-      border-radius:12px;
+      padding:25px;
+      margin:20px 0;
+      border-radius:15px;
       text-align:left;
+    }
+
+    img.profile{
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      object-fit:cover;
+      border:3px solid #00e676;
+      margin-top:20px;
     }
 
     .video-card{
       background:#111;
-      padding:10px;
+      padding:15px;
       margin:10px 0;
       border-radius:10px;
+      text-align:left;
     }
 
-    img{
+    .video-card img{
       width:100%;
       border-radius:10px;
     }
@@ -53,21 +118,54 @@
 <body>
 
 <header>
-  <h1>Roman Yosi Official</h1>
-  <p>Independent Music Artist</p>
+  <h1>Roman Yosi Official <span class="badge">✓ Official Artist</span></h1>
+  <p>Musisi • Creator • Independent Artist</p>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="music.html">Music</a>
+    <a href="about.html">About</a>
+    <a href="press/index.html">Press</a>
+  </nav>
+
+  <img class="profile" src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
 </header>
 
 <div class="container">
 
   <div class="card">
-    <h2>🎵 YouTube Feed</h2>
-    <div id="yt-feed">⏳ Loading...</div>
+    <h2>🎵 Tentang</h2>
+    <p>
+      Roman Yosi adalah music artist dan creator asal Indonesia
+      yang aktif di Spotify, YouTube, TikTok, dan Instagram.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>🔥 Rilisan Terbaru (YouTube Feed)</h2>
+    <div id="yt-feed"></div>
+  </div>
+
+  <div class="card">
+    <h2>🎤 ARTIST PROFILE</h2>
+    <p>
+      Independent music artist focusing on emotional pop and storytelling music.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>📱 Sosial Media</h2>
+    <p>
+      <a href="https://www.tiktok.com/@romanyosi">@romanyosi</a><br>
+      <a href="https://www.instagram.com/roman.yosi">@roman.yosi</a><br>
+      <a href="https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ">Spotify Artist</a>
+    </p>
   </div>
 
 </div>
 
 <footer>
-  © 2026 Roman Yosi
+  © 2026 Roman Yosi Official
 </footer>
 
 <script>
@@ -78,67 +176,44 @@ const channels = [
 ];
 
 async function loadYT() {
-  const container = document.getElementById("yt-feed");
-  let videos = [];
-
-  container.innerHTML = "⏳ Mengambil video...";
+  let allVideos = [];
 
   try {
     for (const id of channels) {
-
       const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
-
-      // fallback API (lebih stabil dari rss2json)
-      const api = `https://api.allorigins.win/raw?url=${encodeURIComponent(rss)}`;
+      const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
 
       const res = await fetch(api);
+      const data = await res.json();
 
-      if (!res.ok) continue;
-
-      const text = await res.text();
-
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(text, "text/xml");
-
-      const entries = xml.querySelectorAll("entry");
-
-      entries.forEach(e => {
-        const title = e.querySelector("title")?.textContent;
-        const link = e.querySelector("link")?.getAttribute("href");
-        const date = e.querySelector("published")?.textContent;
-
-        const thumb =
-          e.querySelector("media\\:thumbnail")?.getAttribute("url") || "";
-
-        videos.push({ title, link, date, thumb });
-      });
+      if (data.items) {
+        allVideos = allVideos.concat(data.items);
+      }
     }
 
-    // kalau kosong → tetap tampil UI
-    if (videos.length === 0) {
-      container.innerHTML = "⚠️ Belum ada video atau feed tidak tersedia";
-      return;
-    }
-
-    videos.sort((a,b) => new Date(b.date) - new Date(a.date));
+    allVideos.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
     let html = "";
 
-    videos.slice(0,6).forEach(v => {
+    if (allVideos.length === 0) {
+      document.getElementById("yt-feed").innerHTML = "<p>Belum ada video</p>";
+      return;
+    }
+
+    allVideos.slice(0, 6).forEach(item => {
       html += `
         <div class="video-card">
-          ${v.thumb ? `<img src="${v.thumb}">` : ""}
-          <p><a href="${v.link}" target="_blank">▶ ${v.title}</a></p>
+          <img src="${item.thumbnail}">
+          <p><a href="${item.link}" target="_blank">▶ ${item.title}</a></p>
         </div>
       `;
     });
 
-    container.innerHTML = html;
+    document.getElementById("yt-feed").innerHTML = html;
 
   } catch (err) {
-    console.log(err);
-    container.innerHTML =
-      "❌ Feed gagal dimuat (cek koneksi atau API)";
+    document.getElementById("yt-feed").innerHTML =
+      "<p>⚠️ YouTube feed tidak dapat dimuat</p>";
   }
 }
 

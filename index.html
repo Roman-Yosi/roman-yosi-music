@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
   <title>Roman Yosi Official</title>
 
   <meta name="description" content="Roman Yosi Official - Musisi dan creator Indonesia.">
   <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://roman-yosi.github.io/roman-yosi-music/">
+
+  <meta property="og:title" content="Roman Yosi Official">
+  <meta property="og:description" content="Musisi dan creator Indonesia - Roman Yosi Official">
+  <meta property="og:type" content="website">
 
   <style>
     body{
@@ -21,15 +28,13 @@
 
     header{
       padding:50px 20px;
-      background:linear-gradient(135deg,#111,#222);
+      background:#111;
     }
 
-    h1{font-size:40px;margin:0;}
+    h1{font-size:38px;}
 
     .badge{
-      display:inline-block;
       background:#1db954;
-      color:white;
       padding:4px 10px;
       border-radius:20px;
       font-size:12px;
@@ -47,22 +52,10 @@
       font-weight:bold;
     }
 
-    nav a:hover{opacity:0.7;}
-
-    .social{
-      margin-top:10px;
-    }
-
-    .social a{
-      margin:0 8px;
-      color:#fff;
-      font-size:14px;
-    }
-
     .container{
-      padding:25px;
       max-width:900px;
       margin:auto;
+      padding:20px;
     }
 
     .card{
@@ -71,6 +64,15 @@
       margin:15px 0;
       border-radius:12px;
       text-align:left;
+    }
+
+    img.profile{
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      object-fit:cover;
+      border:3px solid #00e676;
+      margin-top:15px;
     }
 
     .video-card{
@@ -82,16 +84,10 @@
 
     .video-card img{
       width:100%;
-      border-radius:8px;
+      border-radius:10px;
     }
 
     a{color:#00e676;text-decoration:none;}
-
-    footer{
-      padding:20px;
-      font-size:13px;
-      opacity:0.7;
-    }
   </style>
 </head>
 
@@ -103,18 +99,23 @@
 
   <!-- MENU -->
   <nav>
-    <a href="#">Home</a>
-    <a href="#">Music</a>
-    <a href="#">About</a>
-    <a href="#">Press</a>
+    <a href="index.html">Home</a>
+    <a href="music.html">Music</a>
+    <a href="about.html">About</a>
+    <a href="press/index.html">Press</a>
   </nav>
 
-  <!-- SOCIAL MENU -->
-  <div class="social">
-    <a href="https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ" target="_blank">Spotify</a>
-    <a href="https://www.youtube.com/@romanyosi" target="_blank">YouTube</a>
-    <a href="https://www.tiktok.com/@romanyosi" target="_blank">TikTok</a>
-    <a href="https://www.instagram.com/roman.yosi" target="_blank">Instagram</a>
+  <!-- FOTO PROFIL FIX -->
+  <img class="profile"
+       src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg"
+       onerror="this.src='https://via.placeholder.com/180';">
+
+  <!-- SOCIAL -->
+  <div style="margin-top:10px;">
+    <a href="https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ">Spotify</a> |
+    <a href="https://www.youtube.com/@romanyosi">YouTube</a> |
+    <a href="https://www.tiktok.com/@romanyosi">TikTok</a> |
+    <a href="https://www.instagram.com/roman.yosi">Instagram</a>
   </div>
 </header>
 
@@ -122,7 +123,7 @@
 
   <div class="card">
     <h2>🎵 YouTube Feed</h2>
-    <div id="yt-feed">Loading...</div>
+    <div id="yt-feed">Loading video...</div>
   </div>
 
 </div>
@@ -144,30 +145,32 @@ async function loadYT() {
 
   try {
     for (const id of channels) {
-      const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
-      const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(url);
+      try {
+        const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
+        const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
 
-      const res = await fetch(api);
-      const data = await res.json();
+        const res = await fetch(api);
+        const data = await res.json();
 
-      if (data && data.items) {
-        allVideos = allVideos.concat(data.items);
-      }
+        if (data && data.items) {
+          allVideos = allVideos.concat(data.items);
+        }
+      } catch (e) {}
+    }
+
+    if (allVideos.length === 0) {
+      container.innerHTML = "⚠️ Tidak ada video ditemukan";
+      return;
     }
 
     allVideos.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-    if (allVideos.length === 0) {
-      container.innerHTML = "⚠️ Tidak ada video";
-      return;
-    }
 
     let html = "";
 
     allVideos.slice(0, 6).forEach(v => {
       html += `
         <div class="video-card">
-          <img src="${v.thumbnail}">
+          <img src="${v.thumbnail || ''}">
           <p><a href="${v.link}" target="_blank">▶ ${v.title}</a></p>
         </div>
       `;
@@ -175,7 +178,7 @@ async function loadYT() {
 
     container.innerHTML = html;
 
-  } catch (e) {
+  } catch (err) {
     container.innerHTML = "⚠️ Gagal load YouTube feed";
   }
 }

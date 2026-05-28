@@ -169,26 +169,52 @@
 </footer>
 
 <script>
+const channels = [
+  "UCUTSzBr1CERM8lB9OTCwrQg",
+  "UCMnig2Zwu_aHwu9LS_2XsgA",
+  "UCYQsajxT6ehvHUjalKRT21A"
+];
+
 async function loadYT() {
-  const rss = "https://www.youtube.com/feeds/videos.xml?channel_id=UCUTSzBr1CERM8lB9OTCwrQg";
+  let allVideos = [];
 
-  const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
+  try {
+    for (const id of channels) {
+      const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
+      const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
 
-  const res = await fetch(api);
-  const data = await res.json();
+      const res = await fetch(api);
+      const data = await res.json();
 
-  let html = "";
+      if (data.items) {
+        allVideos = allVideos.concat(data.items);
+      }
+    }
 
-  data.items.slice(0,3).forEach(item=>{
-    html += `
-      <div class="video-card">
-        <img src="${item.thumbnail}">
-        <p><a href="${item.link}" target="_blank">▶ ${item.title}</a></p>
-      </div>
-    `;
-  });
+    allVideos.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
-  document.getElementById("yt-feed").innerHTML = html;
+    let html = "";
+
+    if (allVideos.length === 0) {
+      document.getElementById("yt-feed").innerHTML = "<p>Belum ada video</p>";
+      return;
+    }
+
+    allVideos.slice(0, 6).forEach(item => {
+      html += `
+        <div class="video-card">
+          <img src="${item.thumbnail}">
+          <p><a href="${item.link}" target="_blank">▶ ${item.title}</a></p>
+        </div>
+      `;
+    });
+
+    document.getElementById("yt-feed").innerHTML = html;
+
+  } catch (err) {
+    document.getElementById("yt-feed").innerHTML =
+      "<p>⚠️ YouTube feed tidak dapat dimuat</p>";
+  }
 }
 
 loadYT();

@@ -67,6 +67,22 @@
       margin-left:8px;
     }
 
+    /* NAV MENU */
+    nav{
+      margin-top:15px;
+    }
+
+    nav a{
+      color:#00e676;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    nav a:hover{
+      opacity:0.7;
+    }
+
     .container{
       padding:30px 20px;
       max-width:900px;
@@ -112,6 +128,14 @@
   <h1>Roman Yosi Official <span class="badge">✓ Official Artist</span></h1>
   <p>Musisi • Creator • Independent Artist</p>
 
+  <!-- MENU SUDAH DITAMBAH -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="music.html">Music</a>
+    <a href="about.html">About</a>
+    <a href="press/index.html">Press</a>
+  </nav>
+
   <img class="profile" src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
 </header>
 
@@ -151,9 +175,7 @@ async function loadYT() {
         if (data && data.items) {
           allVideos = allVideos.concat(data.items);
         }
-      } catch (e) {
-        console.log("Channel error:", id);
-      }
+      } catch (e) {}
     }
 
     if (allVideos.length === 0) {

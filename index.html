@@ -5,41 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-
   <title>Roman Yosi Official</title>
 
-  <meta name="description" content="Roman Yosi Official - Musisi dan creator Indonesia. Dengarkan karya musik terbaru di Spotify, YouTube, dan TikTok.">
+  <meta name="description" content="Roman Yosi Official - Musisi dan creator Indonesia.">
   <meta name="robots" content="index, follow">
-
-  <link rel="canonical" href="https://roman-yosi.github.io/roman-yosi-music/">
-
-  <meta property="og:title" content="Roman Yosi Official">
-  <meta property="og:description" content="Musisi dan creator Indonesia - Roman Yosi Official">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://roman-yosi.github.io/roman-yosi-music/">
-  <meta property="og:image" content="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MusicGroup",
-    "name": "Roman Yosi",
-    "alternateName": "Roman Yosi Official",
-    "url": "https://roman-yosi.github.io/roman-yosi-music/",
-    "image": "https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg",
-    "description": "Indonesian independent music artist specializing in emotional pop and storytelling music.",
-    "genre": "Indie Pop",
-    "sameAs": [
-      "https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ",
-      "https://www.youtube.com/@romanyosi",
-      "https://www.youtube.com/@romanyosimusic",
-      "https://www.tiktok.com/@romanyosi",
-      "https://www.instagram.com/roman.yosi",
-      "https://www.wikidata.org/wiki/Q139959645",
-      "https://musicbrainz.org/artist/7193887"
-    ]
-  }
-  </script>
 
   <style>
     body{
@@ -51,11 +20,11 @@
     }
 
     header{
-      padding:60px 20px;
+      padding:50px 20px;
       background:linear-gradient(135deg,#111,#222);
     }
 
-    h1{font-size:42px;margin-bottom:10px;}
+    h1{font-size:40px;margin:0;}
 
     .badge{
       display:inline-block;
@@ -63,11 +32,10 @@
       color:white;
       padding:4px 10px;
       border-radius:20px;
-      font-size:13px;
+      font-size:12px;
       margin-left:8px;
     }
 
-    /* NAV MENU */
     nav{
       margin-top:15px;
     }
@@ -79,70 +47,81 @@
       font-weight:bold;
     }
 
-    nav a:hover{
-      opacity:0.7;
+    nav a:hover{opacity:0.7;}
+
+    .social{
+      margin-top:10px;
+    }
+
+    .social a{
+      margin:0 8px;
+      color:#fff;
+      font-size:14px;
     }
 
     .container{
-      padding:30px 20px;
+      padding:25px;
       max-width:900px;
       margin:auto;
     }
 
     .card{
       background:#1b1b1b;
-      padding:25px;
-      margin:20px 0;
-      border-radius:15px;
+      padding:20px;
+      margin:15px 0;
+      border-radius:12px;
       text-align:left;
-    }
-
-    img.profile{
-      width:180px;
-      height:180px;
-      border-radius:50%;
-      object-fit:cover;
-      border:3px solid #00e676;
-      margin-top:20px;
     }
 
     .video-card{
       background:#111;
-      padding:15px;
+      padding:10px;
       margin:10px 0;
       border-radius:10px;
     }
 
     .video-card img{
       width:100%;
-      border-radius:10px;
+      border-radius:8px;
     }
 
     a{color:#00e676;text-decoration:none;}
+
+    footer{
+      padding:20px;
+      font-size:13px;
+      opacity:0.7;
+    }
   </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Roman Yosi Official <span class="badge">✓ Official Artist</span></h1>
+  <h1>Roman Yosi Official <span class="badge">✓ Artist</span></h1>
   <p>Musisi • Creator • Independent Artist</p>
 
-  <!-- MENU SUDAH DITAMBAH -->
+  <!-- MENU -->
   <nav>
-    <a href="index.html">Home</a>
-    <a href="music.html">Music</a>
-    <a href="about.html">About</a>
-    <a href="press/index.html">Press</a>
+    <a href="#">Home</a>
+    <a href="#">Music</a>
+    <a href="#">About</a>
+    <a href="#">Press</a>
   </nav>
 
-  <img class="profile" src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
+  <!-- SOCIAL MENU -->
+  <div class="social">
+    <a href="https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ" target="_blank">Spotify</a>
+    <a href="https://www.youtube.com/@romanyosi" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@romanyosi" target="_blank">TikTok</a>
+    <a href="https://www.instagram.com/roman.yosi" target="_blank">Instagram</a>
+  </div>
 </header>
 
 <div class="container">
 
   <div class="card">
-    <h2>🎵 Rilisan Terbaru (YouTube Feed)</h2>
+    <h2>🎵 YouTube Feed</h2>
     <div id="yt-feed">Loading...</div>
   </div>
 
@@ -165,41 +144,39 @@ async function loadYT() {
 
   try {
     for (const id of channels) {
-      try {
-        const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
-        const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
+      const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
+      const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(url);
 
-        const res = await fetch(api);
-        const data = await res.json();
+      const res = await fetch(api);
+      const data = await res.json();
 
-        if (data && data.items) {
-          allVideos = allVideos.concat(data.items);
-        }
-      } catch (e) {}
-    }
-
-    if (allVideos.length === 0) {
-      container.innerHTML = "⚠️ Belum ada video";
-      return;
+      if (data && data.items) {
+        allVideos = allVideos.concat(data.items);
+      }
     }
 
     allVideos.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
+    if (allVideos.length === 0) {
+      container.innerHTML = "⚠️ Tidak ada video";
+      return;
+    }
+
     let html = "";
 
-    allVideos.slice(0, 6).forEach(item => {
+    allVideos.slice(0, 6).forEach(v => {
       html += `
         <div class="video-card">
-          <img src="${item.thumbnail || ''}">
-          <p><a href="${item.link}" target="_blank">▶ ${item.title}</a></p>
+          <img src="${v.thumbnail}">
+          <p><a href="${v.link}" target="_blank">▶ ${v.title}</a></p>
         </div>
       `;
     });
 
     container.innerHTML = html;
 
-  } catch (err) {
-    container.innerHTML = "⚠️ YouTube feed tidak dapat dimuat";
+  } catch (e) {
+    container.innerHTML = "⚠️ Gagal load YouTube feed";
   }
 }
 

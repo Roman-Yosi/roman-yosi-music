@@ -19,7 +19,6 @@
   <meta property="og:url" content="https://roman-yosi.github.io/roman-yosi-music/">
   <meta property="og:image" content="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
 
-  <!-- 🔥 FINAL KNOWLEDGE GRAPH SCHEMA -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -68,13 +67,6 @@
       margin-left:8px;
     }
 
-    nav a{
-      color:#00e676;
-      margin:0 10px;
-      text-decoration:none;
-      font-weight:bold;
-    }
-
     .container{
       padding:30px 20px;
       max-width:900px;
@@ -103,7 +95,6 @@
       padding:15px;
       margin:10px 0;
       border-radius:10px;
-      text-align:left;
     }
 
     .video-card img{
@@ -121,45 +112,14 @@
   <h1>Roman Yosi Official <span class="badge">✓ Official Artist</span></h1>
   <p>Musisi • Creator • Independent Artist</p>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="music.html">Music</a>
-    <a href="about.html">About</a>
-    <a href="press/index.html">Press</a>
-  </nav>
-
   <img class="profile" src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
 </header>
 
 <div class="container">
 
   <div class="card">
-    <h2>🎵 Tentang</h2>
-    <p>
-      Roman Yosi adalah music artist dan creator asal Indonesia
-      yang aktif di Spotify, YouTube, TikTok, dan Instagram.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>🔥 Rilisan Terbaru (YouTube Feed)</h2>
-    <div id="yt-feed"></div>
-  </div>
-
-  <div class="card">
-    <h2>🎤 ARTIST PROFILE</h2>
-    <p>
-      Independent music artist focusing on emotional pop and storytelling music.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>📱 Sosial Media</h2>
-    <p>
-      <a href="https://www.tiktok.com/@romanyosi">@romanyosi</a><br>
-      <a href="https://www.instagram.com/roman.yosi">@roman.yosi</a><br>
-      <a href="https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ">Spotify Artist</a>
-    </p>
+    <h2>🎵 Rilisan Terbaru (YouTube Feed)</h2>
+    <div id="yt-feed">Loading...</div>
   </div>
 
 </div>
@@ -176,44 +136,48 @@ const channels = [
 ];
 
 async function loadYT() {
+  const container = document.getElementById("yt-feed");
   let allVideos = [];
 
   try {
     for (const id of channels) {
-      const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
-      const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
+      try {
+        const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
+        const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
 
-      const res = await fetch(api);
-      const data = await res.json();
+        const res = await fetch(api);
+        const data = await res.json();
 
-      if (data.items) {
-        allVideos = allVideos.concat(data.items);
+        if (data && data.items) {
+          allVideos = allVideos.concat(data.items);
+        }
+      } catch (e) {
+        console.log("Channel error:", id);
       }
+    }
+
+    if (allVideos.length === 0) {
+      container.innerHTML = "⚠️ Belum ada video";
+      return;
     }
 
     allVideos.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
     let html = "";
 
-    if (allVideos.length === 0) {
-      document.getElementById("yt-feed").innerHTML = "<p>Belum ada video</p>";
-      return;
-    }
-
     allVideos.slice(0, 6).forEach(item => {
       html += `
         <div class="video-card">
-          <img src="${item.thumbnail}">
+          <img src="${item.thumbnail || ''}">
           <p><a href="${item.link}" target="_blank">▶ ${item.title}</a></p>
         </div>
       `;
     });
 
-    document.getElementById("yt-feed").innerHTML = html;
+    container.innerHTML = html;
 
   } catch (err) {
-    document.getElementById("yt-feed").innerHTML =
-      "<p>⚠️ YouTube feed tidak dapat dimuat</p>";
+    container.innerHTML = "⚠️ YouTube feed tidak dapat dimuat";
   }
 }
 

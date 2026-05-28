@@ -19,7 +19,7 @@
   <meta property="og:url" content="https://roman-yosi.github.io/roman-yosi-music/">
   <meta property="og:image" content="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
 
-  <!-- 🔥 STRUCTURED DATA -->
+  <!-- 🔥 STRUCTURED DATA (KNOWLEDGE GRAPH BOOSTED) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,14 +28,14 @@
     "alternateName": "Roman Yosi Official",
     "url": "https://roman-yosi.github.io/roman-yosi-music/",
     "image": "https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg",
+    "description": "Indonesian independent music artist specializing in emotional pop and storytelling music.",
+
     "sameAs": [
       "https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ",
-      "https://youtube.com/@romanyosi",
-      "https://youtube.com/@romanyosimusic",
+      "https://www.youtube.com/@romanyosi",
+      "https://www.youtube.com/@romanyosimusic",
       "https://www.tiktok.com/@romanyosi",
-      "https://www.instagram.com/roman.yosi",
-      "https://roman-yosi.github.io/roman-yosi-music/",
-      "https://roman-yosi.github.io/roman-yosi-music/press/"
+      "https://www.instagram.com/roman.yosi"
     ]
   }
   </script>
@@ -58,7 +58,7 @@
 
     .badge{
       display:inline-block;
-      background:#1da1f2;
+      background:#1db954;
       color:white;
       padding:4px 10px;
       border-radius:20px;
@@ -96,10 +96,6 @@
       margin-top:20px;
     }
 
-    h2{color:#1db954;}
-
-    a{color:#00e676;text-decoration:none;}
-
     .video-card{
       background:#111;
       padding:15px;
@@ -112,6 +108,8 @@
       width:100%;
       border-radius:10px;
     }
+
+    a{color:#00e676;text-decoration:none;}
   </style>
 </head>
 
@@ -123,9 +121,8 @@
 
   <nav>
     <a href="index.html">Home</a>
-    <a href="about.html">About</a>
     <a href="music.html">Music</a>
-    <a href="blog/1-roman-yosi-profile.html">Blog</a>
+    <a href="about.html">About</a>
     <a href="press/index.html">Press</a>
   </nav>
 
@@ -138,7 +135,7 @@
     <h2>🎵 Tentang</h2>
     <p>
       Roman Yosi adalah music artist dan creator asal Indonesia
-      yang aktif di Spotify, YouTube, TikTok, Instagram, dan Pinterest.
+      yang aktif di Spotify, YouTube, TikTok, dan Instagram.
     </p>
   </div>
 
@@ -150,7 +147,7 @@
   <div class="card">
     <h2>🎤 ARTIST PROFILE</h2>
     <p>
-      Roman Yosi adalah independent music artist yang fokus pada storytelling dan emotional pop music.
+      Independent music artist focusing on emotional pop and storytelling music.
     </p>
   </div>
 
@@ -171,12 +168,9 @@
 
 <script>
 async function loadYT() {
-  const rss =
-  "https://www.youtube.com/feeds/videos.xml?channel_id=UCUTSzBr1CERM8lB9OTCwrQg";
+  const rss = "https://www.youtube.com/feeds/videos.xml?channel_id=UCUTSzBr1CERM8lB9OTCwrQg";
 
-  const api =
-  "https://api.rss2json.com/v1/api.json?rss_url=" +
-  encodeURIComponent(rss);
+  const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
 
   const res = await fetch(api);
   const data = await res.json();

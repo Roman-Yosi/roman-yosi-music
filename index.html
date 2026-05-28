@@ -4,17 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" href="favicon.ico">
   <title>Roman Yosi Official</title>
-
-  <meta name="description" content="Roman Yosi Official - Musisi dan creator Indonesia">
-  <meta name="robots" content="index, follow">
-
-  <link rel="canonical" href="https://roman-yosi.github.io/roman-yosi-music/">
-
-  <meta property="og:title" content="Roman Yosi Official">
-  <meta property="og:description" content="Musisi dan creator Indonesia">
-  <meta property="og:type" content="website">
 
   <style>
     body{
@@ -71,7 +61,7 @@
 
   <div class="card">
     <h2>🎵 YouTube Feed</h2>
-    <div id="yt-feed">Loading...</div>
+    <div id="yt-feed">⏳ Loading...</div>
   </div>
 
 </div>
@@ -88,45 +78,67 @@ const channels = [
 ];
 
 async function loadYT() {
+  const container = document.getElementById("yt-feed");
   let videos = [];
+
+  container.innerHTML = "⏳ Mengambil video...";
 
   try {
     for (const id of channels) {
-      const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
-      const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+
+      const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
+
+      // fallback API (lebih stabil dari rss2json)
+      const api = `https://api.allorigins.win/raw?url=${encodeURIComponent(rss)}`;
 
       const res = await fetch(api);
-      const data = await res.json();
 
-      if (data.items) {
-        videos = videos.concat(data.items);
-      }
+      if (!res.ok) continue;
+
+      const text = await res.text();
+
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(text, "text/xml");
+
+      const entries = xml.querySelectorAll("entry");
+
+      entries.forEach(e => {
+        const title = e.querySelector("title")?.textContent;
+        const link = e.querySelector("link")?.getAttribute("href");
+        const date = e.querySelector("published")?.textContent;
+
+        const thumb =
+          e.querySelector("media\\:thumbnail")?.getAttribute("url") || "";
+
+        videos.push({ title, link, date, thumb });
+      });
     }
 
-    videos.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-    let html = "";
-
+    // kalau kosong → tetap tampil UI
     if (videos.length === 0) {
-      document.getElementById("yt-feed").innerHTML =
-        "⚠️ Tidak ada video ditemukan";
+      container.innerHTML = "⚠️ Belum ada video atau feed tidak tersedia";
       return;
     }
 
-    videos.slice(0, 6).forEach(v => {
+    videos.sort((a,b) => new Date(b.date) - new Date(a.date));
+
+    let html = "";
+
+    videos.slice(0,6).forEach(v => {
       html += `
         <div class="video-card">
-          <img src="${v.thumbnail}">
+          ${v.thumb ? `<img src="${v.thumb}">` : ""}
           <p><a href="${v.link}" target="_blank">▶ ${v.title}</a></p>
         </div>
       `;
     });
 
-    document.getElementById("yt-feed").innerHTML = html;
+    container.innerHTML = html;
 
-  } catch (e) {
-    document.getElementById("yt-feed").innerHTML =
-      "⚠️ Gagal memuat YouTube feed";
+  } catch (err) {
+    console.log(err);
+    container.innerHTML =
+      "❌ Feed gagal dimuat (cek koneksi atau API)";
   }
 }
 

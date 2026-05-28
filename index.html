@@ -19,7 +19,7 @@
   <meta property="og:url" content="https://roman-yosi.github.io/roman-yosi-music/">
   <meta property="og:image" content="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
 
-  <!-- 🔥 STRUCTURED DATA (FINAL CLEAN ENTITY) -->
+  <!-- 🔥 STRUCTURED DATA -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -66,8 +66,6 @@
       margin-left:8px;
     }
 
-    nav{margin-top:15px;}
-
     nav a{
       color:#00e676;
       margin:0 10px;
@@ -101,17 +99,26 @@
     h2{color:#1db954;}
 
     a{color:#00e676;text-decoration:none;}
+
+    .video-card{
+      background:#111;
+      padding:15px;
+      margin:10px 0;
+      border-radius:10px;
+      text-align:left;
+    }
+
+    .video-card img{
+      width:100%;
+      border-radius:10px;
+    }
   </style>
 </head>
 
 <body>
 
 <header>
-  <h1>
-    Roman Yosi Official
-    <span class="badge">✓ Official Artist</span>
-  </h1>
-
+  <h1>Roman Yosi Official <span class="badge">✓ Official Artist</span></h1>
   <p>Musisi • Creator • Independent Artist</p>
 
   <nav>
@@ -122,8 +129,7 @@
     <a href="press/index.html">Press</a>
   </nav>
 
-  <img class="profile"
-  src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
+  <img class="profile" src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
 </header>
 
 <div class="container">
@@ -132,16 +138,13 @@
     <h2>🎵 Tentang</h2>
     <p>
       Roman Yosi adalah music artist dan creator asal Indonesia
-      yang aktif di Spotify, YouTube, TikTok, Instagram,
-      dan Pinterest.
+      yang aktif di Spotify, YouTube, TikTok, Instagram, dan Pinterest.
     </p>
   </div>
 
   <div class="card">
-    <h2>🔥 Rilisan Terbaru</h2>
-    <p>Itu Haruslah</p>
-    <p>Bertepi Di Sini</p>
-    <p>Jejak Di Dada</p>
+    <h2>🔥 Rilisan Terbaru (YouTube Feed)</h2>
+    <div id="yt-feed"></div>
   </div>
 
   <div class="card">
@@ -165,6 +168,35 @@
 <footer>
   © 2026 Roman Yosi Official
 </footer>
+
+<script>
+async function loadYT() {
+  const rss =
+  "https://www.youtube.com/feeds/videos.xml?channel_id=UCUTSzBr1CERM8lB9OTCwrQg";
+
+  const api =
+  "https://api.rss2json.com/v1/api.json?rss_url=" +
+  encodeURIComponent(rss);
+
+  const res = await fetch(api);
+  const data = await res.json();
+
+  let html = "";
+
+  data.items.slice(0,3).forEach(item=>{
+    html += `
+      <div class="video-card">
+        <img src="${item.thumbnail}">
+        <p><a href="${item.link}" target="_blank">▶ ${item.title}</a></p>
+      </div>
+    `;
+  });
+
+  document.getElementById("yt-feed").innerHTML = html;
+}
+
+loadYT();
+</script>
 
 </body>
 </html>

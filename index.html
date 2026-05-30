@@ -8,7 +8,6 @@
 
   <title>Roman Yosi Official | Indie Pop Artist Indonesia (Rohman)</title>
 
-  <!-- SEO DESCRIPTION (DIKUATKAN ENTITY) -->
   <meta name="description" content="Roman Yosi (Rohman) adalah independent music artist dari Lebak, Banten, Indonesia. Genre Indie Pop, Acoustic Pop, Cinematic Music. Official Spotify & YouTube Artist.">
   <meta name="robots" content="index, follow">
 
@@ -18,23 +17,50 @@
   <meta property="og:description" content="Indie Pop Artist Indonesia - Roman Yosi (Rohman)">
   <meta property="og:type" content="website">
 
-  <!-- 🔥 GOOGLE ENTITY / KNOWLEDGE PANEL SCHEMA -->
+  <!-- 🔥 GOOGLE KNOWLEDGE PANEL / ENTITY SCHEMA (UPGRADED) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     "name": "Roman Yosi",
-    "alternateName": ["Rohman", "Roman Yosi Indonesia", "romanyosi"],
-    "url": "https://roman-yosi.github.io/roman-yosi-music/",
-    "genre": ["Indie Pop", "Acoustic Pop", "Cinematic"],
-    "foundingLocation": "Lebak, Banten, Indonesia",
-    "description": "Indonesian independent music artist known as Roman Yosi (Rohman).",
+    "alternateName": [
+      "Rohman",
+      "romanyosi",
+      "Roman Yosi Official",
+      "Roman Yosi Indonesia"
+    ],
+    "url": "https://roman-yosi.github.io/roman-yosi-artistroman-yosi-site/",
+    "image": "https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg",
+
+    "genre": [
+      "Indie Pop",
+      "Acoustic Pop",
+      "Cinematic Music"
+    ],
+
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Lebak, Banten, Indonesia"
+    },
+
+    "description": "Roman Yosi (Rohman) is an Indonesian independent music artist known for indie pop and cinematic style music releases.",
+
     "sameAs": [
       "https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ",
       "https://www.youtube.com/@romanyosi",
       "https://www.tiktok.com/@romanyosi",
-      "https://www.instagram.com/roman.yosi"
-    ]
+      "https://www.instagram.com/roman.yosi",
+      "https://medium.com/@RomanYosi",
+      "https://romanyosimusic.blogspot.com/",
+      "https://www.reverbnation.com/romanyosi"
+    ],
+
+    "potentialAction": {
+      "@type": "ListenAction",
+      "target": [
+        "https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ"
+      ]
+    }
   }
   </script>
 
@@ -118,7 +144,6 @@
   <h1>Roman Yosi Official <span class="badge">✓ Artist</span></h1>
   <p>Musisi • Creator • Independent Artist</p>
 
-  <!-- ENTITY CLARITY (IMPORTANT UNTUK GOOGLE) -->
   <p style="font-size:13px;opacity:0.8;">
     Roman Yosi (Rohman) • Indie Pop Artist • Lebak, Banten, Indonesia
   </p>
@@ -127,19 +152,17 @@
     <a href="index.html">Home</a>
     <a href="music.html">Music</a>
     <a href="about.html">About</a>
-    <a href="press/index.html">Press</a>
-    <a href="identity.html">Identity</a>
+    <a href="press.html">Press</a>
   </nav>
 
   <img class="profile"
-       src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg"
-       onerror="this.src='https://via.placeholder.com/180';">
+       src="https://raw.githubusercontent.com/Roman-Yosi/Poto-roman-yosi/main/final-image%20(4).jpg">
 
   <div style="margin-top:10px;">
-    <a href="https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ" target="_blank" rel="noopener noreferrer">Spotify</a> |
-    <a href="https://www.youtube.com/@romanyosi" target="_blank" rel="noopener noreferrer">YouTube</a> |
-    <a href="https://www.tiktok.com/@romanyosi" target="_blank" rel="noopener noreferrer">TikTok</a> |
-    <a href="https://www.instagram.com/roman.yosi" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://open.spotify.com/artist/3j2wzsjuf9JcBgRZxP44dJ">Spotify</a> |
+    <a href="https://www.youtube.com/@romanyosi">YouTube</a> |
+    <a href="https://www.tiktok.com/@romanyosi">TikTok</a> |
+    <a href="https://www.instagram.com/roman.yosi">Instagram</a>
   </div>
 </header>
 
@@ -169,22 +192,15 @@ async function loadYT() {
 
   try {
     for (const id of channels) {
-      try {
-        const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
-        const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
+      const rss = `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`;
+      const api = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rss);
 
-        const res = await fetch(api);
-        const data = await res.json();
+      const res = await fetch(api);
+      const data = await res.json();
 
-        if (data && data.items) {
-          allVideos = allVideos.concat(data.items);
-        }
-      } catch (e) {}
-    }
-
-    if (allVideos.length === 0) {
-      container.innerHTML = "⚠️ Tidak ada video ditemukan";
-      return;
+      if (data && data.items) {
+        allVideos = allVideos.concat(data.items);
+      }
     }
 
     allVideos.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
@@ -194,7 +210,7 @@ async function loadYT() {
     allVideos.slice(0, 6).forEach(v => {
       html += `
         <div class="video-card">
-          <img src="${v.thumbnail || ''}">
+          <img src="${v.thumbnail}">
           <p><a href="${v.link}" target="_blank">▶ ${v.title}</a></p>
         </div>
       `;
